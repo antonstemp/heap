@@ -60,7 +60,7 @@ class heapq(object):
             print '{} '.format(node),
         print '\n'
 
-    def push(self, item):
+    def heappush(self, item):
         """
         Adds an element to the heap
         Olog(n)
@@ -77,7 +77,9 @@ class heapq(object):
 
             self._sift_down(new_node)
 
-    def pop(self):
+        return new_node
+
+    def heappop(self):
         """
         Removes the largest element from the heap
         Olog(n)
@@ -118,6 +120,15 @@ class heapq(object):
         non_leaf_nodes = len(self.nodes) // 2
         for node in reversed(self.nodes[:non_leaf_nodes]):
             self._sift_up(node)
+
+    def heapdelete(self, node):
+        self._swap(node, self.root)
+        result = self.heappop()
+
+        self._sift_up(node)
+        self._sift_down(node)
+
+        return result
 
     def size(self):
         return len(self.nodes)
@@ -181,7 +192,7 @@ class heapq(object):
 
         # Ensure O(1) when removing last node
         if node is self.nodes[-1]:
-            self.nodes.pop()
+            self.nodes.heappop()
         else:
             # O(n) operation
             self.nodes.remove(node)
@@ -191,6 +202,6 @@ if __name__ == '__main__':
     h = heapq()
     h.heapify([1, 8, 7, 6, 5, 4, 3, 2, 1])
     h.heap_print()
-    print 'pushing'
-    h.push(10)
+    print 'heappushing'
+    h.heappush(10)
     h.heap_print()
