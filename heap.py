@@ -133,6 +133,9 @@ class heapq(object):
     def size(self):
         return len(self.nodes)
 
+    def peek(self):
+        return self.root.val
+
     def _calc_parent(self, node_number):
         parent_index = (node_number // 2) - 1
         return self.nodes[parent_index]
