@@ -195,7 +195,7 @@ class heapq(object):
 
         # Ensure O(1) when removing last node
         if node is self.nodes[-1]:
-            self.nodes.heappop()
+            self.nodes.pop()
         else:
             # O(n) operation
             self.nodes.remove(node)
